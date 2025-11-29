@@ -25,7 +25,7 @@ export class TaskStore {
       id: faker.string.uuid(),
       title: faker.hacker.phrase(),
       description: faker.lorem.sentences(2),
-      status: faker.helpers.arrayElement(['pending', 'in-progress', 'done']),
+      status: faker.helpers.arrayElement(['Pending', 'In Progress', 'Done']),
       createdAt: faker.date.recent({ days: 20 }),
     }));
 

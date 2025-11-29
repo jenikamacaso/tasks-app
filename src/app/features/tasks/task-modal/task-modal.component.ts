@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TaskStore } from '../../../core/services/task.store';
 import { faker } from '@faker-js/faker';
 import { NgIf, NgFor } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-task-modal',
@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './task-modal.component.html',
 })
 export class TaskModalComponent {
+  @ViewChild('taskForm') taskForm!: NgForm;
+
   task: any = {
     id: faker.string.uuid(),
     title: '',
@@ -31,11 +33,24 @@ export class TaskModalComponent {
   }
 
   save() {
+    if (this.taskForm.invalid) {
+      this.taskForm.form.markAllAsTouched();
+      return;
+    }
+
     if (this.editMode) {
       this.store.update(this.task);
     } else {
       this.store.create(this.task);
     }
     this.router.navigate(['/']);
+  }
+
+  cancel() {
+    if (this.editMode && this.task.id) {
+      this.router.navigate(['/task', this.task.id]);
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 }
