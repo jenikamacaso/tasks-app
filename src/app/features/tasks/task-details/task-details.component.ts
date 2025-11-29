@@ -27,4 +27,8 @@ export class TaskDetailsComponent implements OnInit {
   edit() {
     this.router.navigate(['/task', this.task.id, 'edit']);
   }
+
+  goBack() {
+    this.router.navigate(['/']);
+  }
 }
