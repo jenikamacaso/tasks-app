@@ -1,0 +1,89 @@
+<div class="container py-4 px-20">
+  <div class="row g-2 mb-3">
+    <div class="col-12">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">
+          <i class="bi bi-search"></i>
+        </span>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search"
+          [ngModel]="store.search()"
+          (ngModelChange)="store.search.set($event)"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-2 mb-3 align-items-center justify-content-end">
+    <div class="col-12 col-md-6 col-lg-4 d-flex align-items-center">
+      <p class="mb-0 me-2 d-none d-md-block w-100 text-end">Sort by:</p>
+      <select
+        class="form-select"
+        [ngModel]="store.sortField()"
+        (ngModelChange)="store.setSortField($event)"
+      >
+        <option value="title">Title (A → Z)</option>
+        <option value="createdAt">Created Date (Old → New)</option>
+      </select>
+    </div>
+
+    <div class="col-12 col-md-2 col-lg-2 d-grid">
+      <button class="btn btn-primary" (click)="openAdd()">Add Task</button>
+    </div>
+  </div>
+
+  <!-- Task List -->
+  <div class="row g-3">
+    <div class="col-12" *ngFor="let task of store.paginatedTasks()">
+      <div class="card p-3 shadow-sm">
+        <!-- Title -->
+        <h5 class="mb-1">{{ task.title }}</h5>
+
+        <!-- Description -->
+        <p class="text-muted small mt-2">{{ task.description }}</p>
+
+        <!-- Badge -->
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <span
+            class="badge d-inline-block"
+            [class.bg-success]="task.status === 'done'"
+            [class.bg-warning]="task.status === 'in-progress'"
+            [class.bg-secondary]="task.status === 'pending'"
+          >
+            {{ task.status }}
+          </span>
+
+          <!-- Details button -->
+          <button class="btn btn-sm btn-outline-primary" (click)="goToDetails(task.id)">
+            Details
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <nav class="mt-4 d-flex justify-content-end" *ngIf="store.totalPages() > 1">
+      <ul class="pagination justify-content-center flex-wrap">
+        <li class="page-item" [class.disabled]="store.page() === 1">
+          <a class="page-link" (click)="store.page.set(store.page() - 1)">Prev</a>
+        </li>
+
+        <li
+          *ngFor="let p of [].constructor(store.totalPages()); let i = index"
+          class="page-item"
+          [class.active]="store.page() === i + 1"
+        >
+          <a class="page-link" (click)="store.page.set(i + 1)">
+            {{ i + 1 }}
+          </a>
+        </li>
+
+        <li class="page-item" [class.disabled]="store.page() === store.totalPages()">
+          <a class="page-link" (click)="store.page.set(store.page() + 1)">Next</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
