@@ -74,7 +74,7 @@
   <nav class="mt-4 d-flex justify-content-center justify-content-md-end" *ngIf="store.totalPages() > 1">
     <ul class="pagination custom-pagination mb-0">
 
-      <li class="page-item" [class.disabled]="store.page() === 1">
+      <li *ngIf="store.page() > 1" class="page-item" [class.disabled]="store.page() === 1">
         <button class="page-link arrow-btn" (click)="store.page.set(store.page() - 1)">‹</button>
       </li>
 
