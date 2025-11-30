@@ -1,1 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+.page-wrapper {
+  padding-right: 20rem !important;
+  padding-left: 20rem !important;
+}
+
+/* Large tablets / small laptops */
+@media (max-width: 1400px) {
+  .page-wrapper {
+    padding-left: 10rem !important;
+    padding-right: 10rem !important;
+  }
+}
+
+/* Tablets */
+@media (max-width: 992px) {
+  .page-wrapper {
+    padding-left: 5rem !important;
+    padding-right: 5rem !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .page-wrapper {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
