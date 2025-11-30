@@ -1,4 +1,4 @@
-<div class="container py-4" *ngIf="task">
+<div class="container page-wrapper py-4" *ngIf="task">
   <button class="btn btn-link" (click)="goBack()">← Back</button>
 
   <div class="card p-4 shadow-sm">
@@ -21,12 +21,12 @@
     <p class="mt-3">{{ task.description }}</p>
 
     <!-- Created at -->
-    <p class="text-muted">Created at: {{ task.createdAt | date : 'medium' }}</p>
+    <p class="created-text">Created on {{ task.createdAt | date : 'MMMM d, y, h:mm a' }}</p>
 
     <!-- Actions -->
-    <div class="mt-3">
+    <div class="mt-3 d-flex align-items-center justify-content-end">
       <button class="btn btn-light me-2" (click)="edit()">Edit</button>
-      <button class="btn btn-danger" (click)="deleteTask()">Delete</button>
+      <button class="btn btn-light" (click)="deleteTask()">Delete</button>
     </div>
   </div>
 </div>
