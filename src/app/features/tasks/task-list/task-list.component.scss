@@ -7,9 +7,15 @@
 .search-input {
   width: 100%;
   padding: 10px 12px 10px 34px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #d6d1d1;
   border-radius: 10px;
-  font-size: 14px;
+}
+
+/* Prevent black border or shadow when focused */
+.search-input:focus {
+  border-color: #d6d1d1 !important;
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 .search-icon {
