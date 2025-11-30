@@ -2,13 +2,13 @@ import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TaskStore } from '../../../core/services/task.store';
 import { faker } from '@faker-js/faker';
-import { NgIf, NgFor } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-task-modal',
   standalone: true,
-  imports: [NgIf, NgFor, FormsModule],
+  imports: [NgIf, FormsModule],
   templateUrl: './task-modal.component.html',
 })
 export class TaskModalComponent {

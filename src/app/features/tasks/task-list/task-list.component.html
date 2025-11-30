@@ -1,13 +1,12 @@
 <div class="container py-4 px-20">
   <div class="row g-2 mb-3">
     <div class="col-12">
-      <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </span>
+      <div class="search-wrapper">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+
         <input
           type="text"
-          class="form-control"
+          class="search-input"
           placeholder="Search"
           [ngModel]="store.search()"
           (ngModelChange)="store.search.set($event)"
@@ -65,23 +64,26 @@
 
     <!-- Pagination -->
     <nav class="mt-4 d-flex justify-content-end" *ngIf="store.totalPages() > 1">
-      <ul class="pagination justify-content-center flex-wrap">
+      <ul class="pagination custom-pagination mb-0">
+        <!-- Previous arrow -->
         <li class="page-item" [class.disabled]="store.page() === 1">
-          <a class="page-link" (click)="store.page.set(store.page() - 1)">Prev</a>
+          <button class="page-link arrow-btn" (click)="store.page.set(store.page() - 1)">‹</button>
         </li>
 
-        <li
-          *ngFor="let p of [].constructor(store.totalPages()); let i = index"
-          class="page-item"
-          [class.active]="store.page() === i + 1"
-        >
-          <a class="page-link" (click)="store.page.set(i + 1)">
+        <!-- Page numbers -->
+        <li *ngFor="let p of [].constructor(store.totalPages()); let i = index" class="page-item">
+          <button
+            class="page-link page-number"
+            [class.active]="store.page() === i + 1"
+            (click)="store.page.set(i + 1)"
+          >
             {{ i + 1 }}
-          </a>
+          </button>
         </li>
 
+        <!-- Next arrow -->
         <li class="page-item" [class.disabled]="store.page() === store.totalPages()">
-          <a class="page-link" (click)="store.page.set(store.page() + 1)">Next</a>
+          <button class="page-link arrow-btn" (click)="store.page.set(store.page() + 1)">›</button>
         </li>
       </ul>
     </nav>
